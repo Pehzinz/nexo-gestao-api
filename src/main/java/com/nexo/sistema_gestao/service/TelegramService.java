@@ -24,9 +24,10 @@ import java.util.stream.Collectors;
 @Service
 public class TelegramService extends TelegramLongPollingBot {
 
-    private static final String BOT_TOKEN = "BOT_NO_SERVIDOR"; 
+    @org.springframework.beans.factory.annotation.Value("${BOT_TOKEN}")
+    private static String botToken;
     private static final String BOT_USERNAME = "NexoGestao_bot"; 
-    private static final String CHAT_ID = "8806880654"; 
+    private static final String CHAT_ID = "8806880654";
 
     @Autowired private ProdutoRepository produtoRepository;
     @Autowired private VendaRepository vendaRepository;
@@ -36,9 +37,9 @@ public class TelegramService extends TelegramLongPollingBot {
     @Autowired private GeminiService geminiService;
     @Autowired private EstatisticaService estatisticaService;
 
-    public TelegramService() { super(BOT_TOKEN); } 
+    public TelegramService() { super(botToken); } 
     @Override public String getBotUsername() { return BOT_USERNAME; }
-    @Override public String getBotToken() { return BOT_TOKEN; }
+    @Override public String getBotToken() { return botToken; }
 
     @Override
     public void onUpdateReceived(Update update) {
